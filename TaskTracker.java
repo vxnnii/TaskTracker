@@ -28,5 +28,32 @@ public class TaskTracker {
 
     boolean running = true;
     System.out.println("=== Student Task Tracker ===");
+
+    while (running) {
+      System.out.println("\nMenu:");
+      System.out.println("1. Add Task");
+      System.out.println("2. View Tasks");
+      System.out.println("3. Mark Task Complete");
+      System.out.println("4. Remove Task");
+      System.out.println("5. Exit");
+      System.out.print("Enter your choice: ");
+      if (!scanner.hasNextInt()) {
+        System.out.println("Invalid input. Please enter a number.");
+        scanner.nextLine();
+        continue;
+        }
+    }
 }
+
+
+
+/***** Methods *****/
+
+public static void addTask(Scanner scanner) {
+    System.out.print("Enter task description: ");
+    String task = scanner.nextLine();
+    tasks.add(task);
+    completed.add(false);
+    System.out.println("Task added successfully.");
+  }
 }
