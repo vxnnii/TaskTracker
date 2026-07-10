@@ -56,4 +56,19 @@ public static void addTask(Scanner scanner) {
     completed.add(false);
     System.out.println("Task added successfully.");
   }
+  
+
+public static void viewTasks() {
+    if (tasks.isEmpty()) {
+      System.out.println("No tasks available.");
+      return;
+    }
+    System.out.println("\nTasks:");
+    for (int i = 0; i < tasks.size(); i++) {
+      String status = completed.get(i) ? "[Completed]" : "[Pending]";
+      System.out.println((i + 1) + ". " + tasks.get(i) + " " + status);
+    }
+  }
+
+
 }
