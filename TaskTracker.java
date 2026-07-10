@@ -56,7 +56,7 @@ public static void addTask(Scanner scanner) {
     completed.add(false);
     System.out.println("Task added successfully.");
   }
-  
+
 
 public static void viewTasks() {
     if (tasks.isEmpty()) {
@@ -70,5 +70,22 @@ public static void viewTasks() {
     }
   }
 
+public static void markTaskComplete(Scanner scanner) {
+    viewTasks();
+    System.out.print("Enter task number to mark complete: ");
+    if (scanner.hasNextInt()) {
+      int index = scanner.nextInt() - 1;
+      scanner.nextLine();
+      if (index >= 0 && index < tasks.size()) {
+        completed.set(index, true);
+        System.out.println("Task marked as complete.");
+      } else {
+        System.out.println("Invalid task number.");
+      }
+    } else {
+      System.out.println("Invalid input.");
+      scanner.nextLine();
+    }
+  }
 
 }
