@@ -87,5 +87,23 @@ public static void markTaskComplete(Scanner scanner) {
       scanner.nextLine();
     }
   }
-
+  
+public static void removeTask(Scanner scanner) {
+    viewTasks();
+    System.out.print("Enter task number to remove: ");
+    if (scanner.hasNextInt()) {
+      int index = scanner.nextInt() - 1;
+      scanner.nextLine();
+      if (index >= 0 && index < tasks.size()) {
+        tasks.remove(index);
+        completed.remove(index);
+        System.out.println("Task removed successfully.");
+      } else {
+        System.out.println("Invalid task number.");
+      }
+    } else {
+      System.out.println("Invalid input.");
+      scanner.nextLine();
+    }
+  }
 }
