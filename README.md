@@ -7,6 +7,8 @@ A console-based Java task manager, refactored from a single-file program into a 
 - **Add tasks** – create new tasks with a description
 - **View tasks** – list all tasks with their index and status
 - **Complete tasks** – mark a task as done by index
+- **Remove tasks** – delete a task by index
+- **Input validation** – handles non-numeric input, out-of-range indices, and empty task descriptions without crashing
 - **Exit** – cleanly exits the program loop
 
 ## Architecture
@@ -17,10 +19,10 @@ This version moves away from tracking tasks with parallel `ArrayList`s and inste
 Represents a single task. Holds the task's `description` and `completed` status, and knows how to mark itself complete and display itself (via an overridden `toString()`).
 
 ### `TaskManager.java`
-Manages the collection of `Task` objects. Handles adding new tasks, marking a task complete by index, and returning the full list of tasks. Keeps all task-list logic out of `MainApp`.
+Manages the collection of `Task` objects. Handles adding, completing, and removing tasks, returning the full list of tasks, and reporting how many tasks exist (used for validating indices). Keeps all task-list logic out of `MainApp`.
 
 ### `MainApp.java`
-The entry point and controller. Displays the menu, reads user input, and calls the appropriate `TaskManager` methods based on the user's choice. Doesn't do any task logic itself — just drives the flow.
+The entry point and controller. Displays the menu, reads and validates user input, and calls the appropriate `TaskManager` methods based on the user's choice. Doesn't do any task logic itself — just drives the flow. A shared `getValidIndex()` helper handles the validation needed by both the Complete and Remove options.
 
 ## How It Works
 
@@ -31,14 +33,15 @@ Menu:
 1. Add Task
 2. View Tasks
 3. Complete Task
-4. Exit
+4. Remove Task
+5. Exit
 ```
 
 Tasks are displayed with their index (starting at 0) and status tag, e.g.:
 
 ```
-0: Finish COSC 4301 lab[Pending]
-1: Push TaskTracker to GitHub[Done]
+0: Finish COSC 4301 lab [Pending]
+1: Push TaskTracker to GitHub [Done]
 ```
 
 ## Running the Project
@@ -62,14 +65,21 @@ Enter task description: Finish COSC 4301 lab
 Task added.
 
 Enter choice: 2
-0: Finish COSC 4301 lab[Pending]
+0: Finish COSC 4301 lab [Pending]
 
 Enter choice: 3
 Enter task index to complete: 0
 Task marked as complete.
 
 Enter choice: 2
-0: Finish COSC 4301 lab[Done]
+0: Finish COSC 4301 lab [Done]
+
+Enter choice: 4
+Enter task index to remove: 0
+Task removed.
+
+Enter choice: 2
+No tasks available. Please add a task first.
 ```
 
 ## Project Structure
@@ -77,18 +87,14 @@ Enter choice: 2
 ```
 Task.java          # Represents an individual task
 TaskManager.java   # Manages the collection of tasks
-MainApp.java       # Entry point; controls program flow
+MainApp.java       # Entry point; controls program flow and input validation
 ```
 
 ## Known Limitations
 
-- **No input validation yet.** Entering a non-numeric menu choice or an out-of-range task index will crash the program. This is intentionally left out for now and planned as the next addition, done in an Agile/iterative style.
 - Tasks are stored in memory only — nothing persists between runs.
-- No option to remove a task in this version (present in the original single-file version, not yet ported over).
 
 ## Planned Improvements
 
-- Add input validation for menu choices and task indices
-- Add a "Remove Task" option
 - Save/load tasks from a file so they persist between runs
 - Add due dates or priority levels

@@ -17,8 +17,16 @@ public class TaskManager {
     public void completeTask(int index) {
         tasks.get(index).markComplete();
     }
+
+    public void removeTask(int index) {
+        tasks.remove(index);
+    }
     
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public int size() {
+        return tasks.size();
     }
 }
