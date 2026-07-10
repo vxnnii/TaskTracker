@@ -5,17 +5,15 @@ Purpose: This is the heart of the prorgram. This class will control the flow of 
 */
 
 
-import java.util.AbstractList;
 import java.util.Scanner;
 
-public class MainApp {
-  public static void main(String[] args) {
+public
+class MainApp {
+ public
+  static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
-
     TaskManager manager = new TaskManager();
-
     System.out.println("=== Student Task Tracker (OOP Version) ===");
-
     while (true) {
       System.out.println("\nMenu:");
       System.out.println("1. Add Task");
@@ -25,7 +23,6 @@ public class MainApp {
       System.out.print("Enter choice: ");
       int choice = scanner.nextInt();
       scanner.nextLine();
-
       if (choice == 1) {
         System.out.print("Enter task description: ");
         manager.addTask(scanner.nextLine());
@@ -47,5 +44,6 @@ public class MainApp {
         System.out.println("Invalid option.");
       }
     }
+    scanner.close();
   }
 }
